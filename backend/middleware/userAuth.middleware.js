@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken';
-// import {verifyEmail, sendVerifyOtp} from '../controllers/auth.controller.js';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
 
-dotenv.config();
+// dotenv.config();
 
 const userAuth = async (req, res, next) => {
     
@@ -18,7 +17,7 @@ const userAuth = async (req, res, next) => {
         const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
 
         if(tokenDecode.id){
-            req.body = { userId: tokenDecode.id }
+            req.body.userId =  tokenDecode.id 
         }else{
             return res.json({success: false, message: 'Not Authorized. Login again'});
         }

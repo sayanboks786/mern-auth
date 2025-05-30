@@ -10,5 +10,6 @@ authRoute.post("/login", login);
 authRoute.post("/logout", logout);
 authRoute.post("/send-verify-otp", userAuth, sendVerifyOtp);
 authRoute.post("/verify-account", userAuth, verifyEmail);
+// authRoute.post("/is-auth", userAuth, isAuthenticated);
 
 export default authRoute;
