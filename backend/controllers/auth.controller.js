@@ -197,7 +197,36 @@ export const isAuthenticated = async (req, res) => {
 }
 
 // send password reset otp
-
 export const sendResetOtp = async (req,res) =>{
+    const {email} = req.body;
+
+    if(!email){
+        return res.json({success: false, message: "email is required"});
+    }
     
+    try {
+        const user = await User.findOne({email});
+
+        if (!user) {
+            return res.json({success: false, message: "User not found"});
+        }
+
+        user.resetOtp = otp;
+        user.restOtpExpireAt = Date.now() + 15 * 60 * 1000;
+        
+        await user.save();
+
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: user.email,
+            subject: "Password Reset OTP",
+            text: `Your OTP for reset passwod is ${otp}. Use this OTP to proceed with reset your password.`
+        }
+
+        transporter.sendMail(mailOptions);
+        res.json({success: true, message: "Password reset OTP sent on Email"});        
+
+    } catch (error) {
+        return res.json({success:false, message: error.message});
+    }   
 }
