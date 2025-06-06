@@ -211,6 +211,8 @@ export const sendResetOtp = async (req,res) =>{
             return res.json({success: false, message: "User not found"});
         }
 
+        const otp = String(Math.floor(100000 + Math.random() * 900000));
+
         user.resetOtp = otp;
         user.restOtpExpireAt = Date.now() + 15 * 60 * 1000;
         
