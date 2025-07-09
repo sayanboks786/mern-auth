@@ -12,9 +12,11 @@ const app = express();
 
 const PORT = process.env.PORT || 8000;
 
+const allowOrigin = ['http://localhost:5173']
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({credentials: true}));
+app.use(cors({origin: allowOrigin, credentials: true}));
 
 connectDB();
 

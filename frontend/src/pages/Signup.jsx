@@ -9,12 +9,9 @@ import {
   Heading,
   VStack,
   FormErrorMessage,
-  useToast,
   Text,
-  useColorModeValue,
-  useColorMode
-} from '@chakra-ui/react';
-import { hover } from 'framer-motion';
+  useColorModeValue} from '@chakra-ui/react';
+// import { hover } from 'framer-motion';
 
 
 export const Signup = () => {

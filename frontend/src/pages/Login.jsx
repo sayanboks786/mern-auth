@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Box,
@@ -11,14 +11,15 @@ import {
   FormErrorMessage,
   useToast,
   Text,
-  useColorMode,
   useColorModeValue
 } from '@chakra-ui/react';
-// import { AppContext } from '../context/AppContext';
+import { AppContext } from '../context/AppContext'; 
+import { useNavigate } from 'react-router-dom';
+
 
 export const Login = () => {
-
-  // const{BackendUri, setIsLoggedin} = useContext(AppContext)
+  const navigate = useNavigate();
+  const{BackendUri, setIsLoggedin} = useContext(AppContext)
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,27 +35,59 @@ export const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
      console.log({ email, password }); // test
   // send data here
     const validationErrors = validate();
     setErrors(validationErrors);
-
+    
     if (Object.keys(validationErrors).length === 0) {
       setIsSubmitting(true);
-      // Simulate login API call
-      setTimeout(() => {
-        setIsSubmitting(false);
-        toast({
-          title: 'Login successful.',
-          description: "You've been logged in!",
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
+      try {
+
+        const res = await fetch(`${BackendUri}/api/auth/login`, {
+           method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include', // Important for cookies/session
+        body: JSON.stringify({ email, password })
         });
-      }, 1000);
+
+        const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      setIsLoggedin(true);
+      toast({
+        title: 'Login successful.',
+        description: data.message || "You've been logged in!",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+
+      // Redirect to dashboard 
+        navigate("/");
+
+
+      } catch (error) {
+          toast({
+        title: 'Login failed.',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-  };
+  }
+      }
+     
 
   return (
     <Box
