@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Box,
@@ -10,10 +10,16 @@ import {
   VStack,
   FormErrorMessage,
   useToast,
-  Text
+  Text,
+  useColorMode,
+  useColorModeValue
 } from '@chakra-ui/react';
+// import { AppContext } from '../context/AppContext';
 
 export const Login = () => {
+
+  // const{BackendUri, setIsLoggedin} = useContext(AppContext)
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,6 +35,8 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     console.log({ email, password }); // test
+  // send data here
     const validationErrors = validate();
     setErrors(validationErrors);
 
@@ -58,7 +66,7 @@ export const Login = () => {
       bgGradient='linear(to-l, #7928CA, #FF0080)'
     >
       <Box
-        bg="white"
+         bg={useColorModeValue("gray.50","gray.900")}
         p={8}
         rounded="md"
         shadow="md"

@@ -6,11 +6,13 @@ import { EmailVerify } from './pages/EmailVerify.jsx'
 import { ResetPassword } from './pages/ResetPassword.jsx'
 import Navbar from './components/Navbar.jsx'
 import { Signup } from './pages/Signup.jsx'
+import { Box, useColorModeValue } from '@chakra-ui/react'
 
 function App() {
 
   return (
     <>
+    <Box minH={100} bg={useColorModeValue("gray.100", "gray.900")}>
     <Navbar />
     <Routes>
       <Route path='/' element={<Home />}/>
@@ -19,6 +21,7 @@ function App() {
       <Route path='/email-verify' element={<EmailVerify />}/>
       <Route path='/reset-password' element={<ResetPassword />}/>
     </Routes>
+    </Box>
     </>
   )
 }

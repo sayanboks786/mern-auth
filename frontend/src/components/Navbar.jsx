@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, HStack, Link, IconButton, Button, useDisclosure, Stack, useColorMode, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, Link, IconButton, Button, useDisclosure, Stack, useColorMode, Text, useColorModeValue } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { IoMoon } from "react-icons/io5";
@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
    <>
-    <Box bg="gray.100" px={4}>
+    <Box bg={useColorModeValue("gray.100","gray.900")} px={4} >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
        
         <IconButton
