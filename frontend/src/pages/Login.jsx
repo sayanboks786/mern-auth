@@ -19,8 +19,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const navigate = useNavigate();
-  const{BackendUri, setIsLoggedin} = useContext(AppContext)
-
+  const{BackendUri, setIsLoggedin} = useContext(AppContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);

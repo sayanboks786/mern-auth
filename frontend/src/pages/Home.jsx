@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Stack, Text, VStack,HStack, Box } from '@chakra-ui/react'
+import { Stack, Text, VStack,HStack, Box, useColorMode } from '@chakra-ui/react'
 import { vh } from 'framer-motion'
 
 export const Home = () => {
