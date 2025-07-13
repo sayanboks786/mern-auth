@@ -11,7 +11,7 @@ import {
   FormErrorMessage,
   Text,
   useColorModeValue} from '@chakra-ui/react';
-import { AppContext } from '../context/AppContext'; 
+import  {AppContext}  from '../context/AppContext'; 
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
   
@@ -38,7 +38,7 @@ export const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-     console.log({ name, email, password }); // test
+    //  console.log({ name, email, password }); // test
     
      const validationErrors = validate();
     setErrors(validationErrors);

@@ -13,7 +13,7 @@ import {
   Text,
   useColorModeValue
 } from '@chakra-ui/react';
-import { AppContext } from '../context/AppContext'; 
+import  {AppContext}  from '../context/AppContext'; 
 import { useNavigate } from 'react-router-dom';
 
 
